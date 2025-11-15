@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: 'Ubuntu Mono', monospace, Arial, sans-serif;
+}
+
+#container {
+    position: relative;
+}
+
+#gearCanvas {
+    display: block;
+    background: transparent;
+}
+
+#stats {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#fpsCounter {
+    color: #4ECDC4;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+#chartCanvas {
+    border-radius: 5px;
+}
+
+/* 压力指示器样式 */
+.stress-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 150px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.stress-fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(to top, #4ECDC4, #FF6B6B, #FF0000);
+    transition: height 0.3s ease;
+    border-radius: 13px;
+}
+
+.stress-marks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.stress-mark {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.stress-label {
+    position: absolute;
+    right: 40px;
+    top: 0;
+    color: white;
+    font-size: 12px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* 硬件信息面板样式 */
+.hardware-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 12px;
+    min-width: 250px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.panel-title {
+    color: #4ECDC4;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 5px;
+}
+
+.hardware-item {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hardware-label {
+    color: #ccc;
+}
+
+.hardware-value {
+    color: white;
+    font-weight: bold;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    margin-top: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #4ECDC4;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.network-graph {
+    width: 100%;
+    height: 30px;
+    border-radius: 3px;
+    margin-top: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.network-upload, .network-download {
+    position: absolute;
+    bottom: 0;
+    width: 2px;
+    background: #4ECDC4;
+}
+
+.network-upload {
+    background: #FF6B6B;
+}

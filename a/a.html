@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旋转齿轮 - 系统监控</title>
+    <link rel="stylesheet" href="a.css">
+</head>
+<body>
+    <div id="container">
+        <canvas id="gearCanvas" width="400" height="400"></canvas>
+        <div id="stats">
+            <div id="fpsCounter">FPS: 60</div>
+            <canvas id="chartCanvas" width="300" height="100"></canvas>
+        </div>
+        
+        <!-- 硬件信息面板 -->
+        <div class="hardware-panel">
+            <div class="panel-title">Ubuntu 22.04 LTS - 系统监控</div>
+            
+            <div class="hardware-item">
+                <span class="hardware-label">CPU:</span>
+                <span class="hardware-value" id="cpuUsage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="cpuProgress" style="width: 0%"></div>
+            </div>
+            
+            <div class="hardware-item">
+                <span class="hardware-label">内存:</span>
+                <span class="hardware-value" id="memUsage">0 GB / 0 GB</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="memProgress" style="width: 0%"></div>
+            </div>
+            
+            <div class="hardware-item">
+                <span class="hardware-label">磁盘:</span>
+                <span class="hardware-value" id="diskUsage">0 GB / 0 GB</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="diskProgress" style="width: 0%"></div>
+            </div>
+            
+            <div class="hardware-item">
+                <span class="hardware-label">温度:</span>
+                <span class="hardware-value" id="tempValue">0°C</span>
+            </div>
+            
+            <div class="hardware-item">
+                <span class="hardware-label">网络:</span>
+                <span class="hardware-value" id="networkSpeed">0 KB/s</span>
+            </div>
+            <div class="network-graph" id="networkGraph"></div>
+            
+            <div class="hardware-item">
+                <span class="hardware-label">进程:</span>
+                <span class="hardware-value" id="processCount">0</span>
+            </div>
+            
+            <div class="hardware-item">
+                <span class="hardware-label">运行时间:</span>
+                <span class="hardware-value" id="uptime">0:00:00</span>
+            </div>
+        </div>
+        
+        <!-- 压力指示器 -->
+        <div class="stress-indicator">
+            <div class="stress-fill" id="stressFill"></div>
+            <div class="stress-marks">
+                <div class="stress-mark"></div>
+                <div class="stress-mark"></div>
+                <div class="stress-mark"></div>
+                <div class="stress-mark"></div>
+                <div class="stress-mark"></div>
+            </div>
+            <div class="stress-label" id="stressLabel">CPU 负载</div>
+        </div>
+    </div>
+    
+    <script src="d.js"></script>
+</body>
+</html>
