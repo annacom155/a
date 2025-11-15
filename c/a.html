@@ -1,1 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广告ID监控终端</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background-color: #111;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .title {
+            font-size: 18px;
+            color: #ff6600;
+            font-weight: bold;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            background-color: #222;
+            color: #00ff00;
+            border: 1px solid #333;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: #333;
+            border-color: #00aaff;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .balance-info {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        .balance-label {
+            color: #aaa;
+        }
+        
+        .balance-value {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        .terminal-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            overflow: hidden;
+        }
+        
+        .terminal {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .output {
+            height: 100%;
+            padding: 10px;
+            overflow-y: auto;
+            line-height: 1.2;
+        }
+        
+        .line {
+            white-space: nowrap;
+            margin-bottom: 2px;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .prefix {
+            margin-right: 5px;
+            color: #00aaff;
+        }
+        
+        .suffix {
+            margin-left: 5px;
+            color: #ffaa00;
+        }
+        
+        .status-bar {
+            background-color: #111;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #aaa;
+            border-top: 1px solid #333;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .controls {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">广告ID监控终端</div>
+        <div class="controls">
+            <button class="btn" id="startBtn">开始监控</button>
+            <button class="btn" id="stopBtn">暂停监控</button>
+        </div>
+        <div class="balance-info">
+            <span class="balance-label">广告质量: </span>
+            <span class="balance-value" id="balanceValue">0.00</span>
+        </div>
+    </div>
+    
+    <div class="terminal-container">
+        <div class="terminal">
+            <div class="output" id="output"></div>
+        </div>
+    </div>
+    
+    <div class="status-bar">
+        <div class="stats">
+            <span>广告总数: <span id="totalAds">0</span></span>
+            <span>观看成功: <span id="successfulAds">0</span></span>
+            <span>正在预览: <span id="previewingAds">0</span></span>
+            <span>监控状态: <span id="monitorStatus">运行中</span></span>
+        </div>
+        <div>系统时间: <span id="currentTime"></span></div>
+    </div>
 
+    <script>
+        // DOM元素
+        const output = document.getElementById('output');
+        const balanceValue = document.getElementById('balanceValue');
+        const totalAdsElement = document.getElementById('totalAds');
+        const successfulAdsElement = document.getElementById('successfulAds');
+        const previewingAdsElement = document.getElementById('previewingAds');
+        const monitorStatusElement = document.getElementById('monitorStatus');
+        const currentTimeElement = document.getElementById('currentTime');
+        
+        // 按钮
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        
+        // 广告前缀和后缀
+        const prefixes = ["快手联盟ID:", "穿山甲ID:", "优良会ID:", "百度广告ID:", "腾讯广告ID:", "字节跳动ID:"];
+        const suffixes = ["正在预览", "观看中", "观看成功"];
+        
+        // 应用状态
+        let state = {
+            balance: 0,
+            isMonitoring: true,
+            intervalId: null,
+            totalAds: 0,
+            successfulAds: 0,
+            previewingAds: 0
+        };
+        
+        // 初始化
+        function init() {
+            loadState();
+            updateUI();
+            startMonitoring();
+            updateCurrentTime();
+            
+            // 设置定时器更新系统时间
+            setInterval(updateCurrentTime, 1000);
+            
+            // 绑定事件
+            bindEvents();
+        }
+        
+        // 绑定事件
+        function bindEvents() {
+            startBtn.addEventListener('click', startMonitoring);
+            stopBtn.addEventListener('click', stopMonitoring);
+        }
+        
+        // 从本地存储加载状态
+        function loadState() {
+            const savedState = localStorage.getItem('adMonitorState');
+            if (savedState) {
+                const parsedState = JSON.parse(savedState);
+                state = { ...state, ...parsedState };
+            }
+        }
+        
+        // 保存状态到本地存储
+        function saveState() {
+            localStorage.setItem('adMonitorState', JSON.stringify(state));
+        }
+        
+        // 更新UI
+        function updateUI() {
+            balanceValue.textContent = state.balance.toFixed(2);
+            totalAdsElement.textContent = state.totalAds;
+            successfulAdsElement.textContent = state.successfulAds;
+            previewingAdsElement.textContent = state.previewingAds;
+            monitorStatusElement.textContent = state.isMonitoring ? '运行中' : '已暂停';
+            monitorStatusElement.style.color = state.isMonitoring ? '#00ff00' : '#ff6600';
+        }
+        
+        // 更新系统时间
+        function updateCurrentTime() {
+            const now = new Date();
+            currentTimeElement.textContent = now.toLocaleString('zh-CN');
+        }
+        
+        // 开始监控
+        function startMonitoring() {
+            if (state.isMonitoring) return;
+            
+            state.isMonitoring = true;
+            updateUI();
+            
+            // 清除现有定时器
+            if (state.intervalId) {
+                clearInterval(state.intervalId);
+            }
+            
+            // 设置新定时器，每隔1秒添加一个新广告
+            state.intervalId = setInterval(addNewLine, 1000);
+        }
+        
+        // 暂停监控
+        function stopMonitoring() {
+            if (!state.isMonitoring) return;
+            
+            state.isMonitoring = false;
+            updateUI();
+            
+            if (state.intervalId) {
+                clearInterval(state.intervalId);
+                state.intervalId = null;
+            }
+        }
+        
+        // 生成随机广告ID
+        function generateRandomAd() {
+            const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+            
+            const length = Math.floor(Math.random() * 10) + 6; // 6-15位
+            let id = '';
+            for (let i = 0; i < length; i++) {
+                id += Math.floor(Math.random() * 10);
+            }
+            
+            return { prefix, id, suffix };
+        }
+        
+        // 添加新行到终端
+        function addNewLine() {
+            const ad = generateRandomAd();
+            const newLine = document.createElement('div');
+            newLine.className = 'line';
+            
+            const prefixSpan = document.createElement('span');
+            prefixSpan.className = 'prefix';
+            prefixSpan.textContent = ad.prefix;
+            
+            const suffixSpan = document.createElement('span');
+            suffixSpan.className = 'suffix';
+            suffixSpan.textContent = ad.suffix;
+            
+            newLine.appendChild(prefixSpan);
+            newLine.appendChild(document.createTextNode(ad.id));
+            newLine.appendChild(suffixSpan);
+            output.appendChild(newLine);
+            
+            // 更新统计
+            state.totalAds++;
+            if (ad.suffix === '观看成功') {
+                state.successfulAds++;
+                
+                // 增加余额
+                const earnings = Math.random() * 0.1;
+                state.balance += earnings;
+            } else if (ad.suffix === '正在预览') {
+                state.previewingAds++;
+            }
+            
+            // 限制行数，防止内存泄漏
+            if (output.children.length > 100) {
+                output.removeChild(output.firstChild);
+            }
+            
+            // 滚动到底部
+            output.scrollTop = output.scrollHeight;
+            
+            // 更新UI和保存状态
+            updateUI();
+            saveState();
+        }
+        
+        // 初始生成一些广告
+        function generateInitialAds() {
+            const count = Math.floor(Math.random() * 10) + 5;
+            for (let i = 0; i < count; i++) {
+                addNewLine();
+            }
+        }
+        
+        // 启动应用
+        init();
+        generateInitialAds();
+    </script>
+</body>
+</html>
