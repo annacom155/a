@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <link rel="stylesheet" href="/asset/b2.css">
+   <script src="/asset/a2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    
+    <!-- 卡密验证模态框 -->
+    <div class="modal" id="keyModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-key"></i> 输入卡密</h2>
+            <div class="form-group">
+                <label for="keyInput">卡密内容</label>
+                <input type="text" id="keyInput" placeholder="请输入您的卡密">
+                <div class="key-status" id="keyStatus"></div>
+                <div class="first-time-note" id="firstTimeNote">首次使用可输入万能卡密: admin</div>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-secondary" id="cancelKey">
+                    <i class="fas fa-times"></i> 取消
+                </button>
+                <button class="btn-primary" id="submitKey">
+                    <i class="fas fa-check"></i> 验证并添加
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>嵌入式Linux服务器管理器</h1>
+ 
+        </header>
+        
+        <div class="dashboard">
+            <div class="stats-card">
+                <h2><i class="fas fa-server"></i> LINUX服务器数量</h2>
+                <div class="stat-value" id="frameCount">0</div>
+                <p class="stat-desc">每个新增Linux服务器会加快广告计数速度。关闭浏览器后重新打开，已激活的服务器将保持激活状态。</p>
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-label">生效中</div>
+                        <div class="stat-number" id="activeFrames">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">等待中</div>
+                        <div class="stat-number" id="pendingFrames">0</div>
+                    </div>
+                </div>
+                <div class="delay-info" id="delayInfo">
+                    <i class="fas fa-clock"></i> 新Linux服务器将在 <span id="countdown">19</span> 秒后生效
+                </div>
+            </div>
+            
+            <div class="stats-card">
+                <h2><i class="fas fa-ad"></i> 广告观看次数</h2>
+                <div class="stat-value" id="adViewCount">0.00</div>
+                <p class="stat-desc">计数速度: <span id="speedText">0.00</span> 次/秒</p>
+                <div class="speed-indicator">
+                    <div class="speed-bar">
+                        <div class="speed-fill" id="speedBar"></div>
+                    </div>
+                    <span id="speedValue">0%</span>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-label">今日新增</div>
+                        <div class="stat-number" id="todayCount">0.00</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">总收益</div>
+                        <div class="stat-number" id="totalEarnings">¥0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn-primary" id="addIframe">
+                <i class="fas fa-plus"></i> 添加嵌入式LINUX服务器
+            </button>
+              <a href="/main.html" class="history-link">
+                <i class="fas fa-history"></i> 点击提现
+            </a>
+            <button class="btn-danger" id="removeAll" disabled>
+                <i class="fas fa-trash"></i> 移除所有LINUX服务器
+            </button>
+              <a href="/index.html" class="history-link">
+                <i class="fas fa-history"></i> 返回首页
+            </a>
+            <a href="/c/a.html" class="history-link">
+                <i class="fas fa-history"></i> 历史广告内容
+            </a>
+              
+        </div>
+        
+        <div class="iframes-container" id="iframeContainer">
+            <div class="empty-state" id="emptyState">
+                <i class="fas fa-server"></i>
+                <h3>暂无嵌入式Linux服务器</h3>
+                <p>点击"添加嵌入式Linux服务器"按钮开始添加</p>
+            </div>
+        </div>
+    </div>
+
+  
+
+</body>
+</html>

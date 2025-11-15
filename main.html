@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收益提现 - 嵌入式Linux服务器管理器</title>
+   <link rel="stylesheet" href="/asset/b.css">
+   <script src="/asset/a.js"></script>
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+    
+    <!-- 弹窗 -->
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">确认提现申请</div>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="withdraw-details">
+                    <div class="detail-row">
+                        <span class="detail-label">提现金额：</span>
+                        <span class="detail-value" id="modalAmount">¥0.00</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">提现方式：</span>
+                        <span class="detail-value" id="modalMethod">支付宝</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">账户信息：</span>
+                        <span class="detail-value" id="modalAccount">未提供</span>
+                    </div>
+                </div>
+                <p>第一次提现账号防止因为工作室或水军，Linux成本和带宽需要预支付50元才可以提现</p>
+               <a href="https://574.netlify.app/pay/webpal.html" style="display:inline-block; padding:10px 20px; background:#007bff; color:white; text-decoration:none; border:2px solid #0056b3; border-radius:5px;">跳转链接</a>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel-btn" id="cancelWithdraw">取消</button>
+                <button class="modal-btn confirm-btn" id="confirmWithdraw">确认提现</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>收益提现</h1>
+            <p class="subtitle">嵌入式Linux服务器管理器 - 广告收益提现系统</p>
+        </header>
+        
+        <!-- 提现限制提示 -->
+        <div class="withdraw-limit" id="withdrawLimitMessage">
+            提现限制：账户余额需满100元才能申请提现
+        </div>
+        
+        <div class="stats-card">
+            <h2>账户余额</h2>
+            <div class="stat-value" id="balanceAmount">¥0.00</div>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-label">可提现金额</div>
+                    <div class="stat-number" id="availableAmount">¥0.00</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">已提现金额</div>
+                    <div class="stat-number" id="withdrawnAmount">¥0.00</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="withdraw-form">
+            <h2>提现申请</h2>
+            <div class="form-group">
+                <label for="withdrawAmount">提现金额 (¥)</label>
+                <input type="number" id="withdrawAmount" placeholder="请输入提现金额" min="1" step="0.01">
+            </div>
+            <div class="form-group">
+                <label for="withdrawMethod">提现方式</label>
+                <select id="withdrawMethod">
+                    <option value="alipay">支付宝</option>
+                    <option value="wechat">微信支付</option>
+                    <option value="bank">银行卡</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="accountInfo">账户信息</label>
+                <input type="text" id="accountInfo" placeholder="请输入您的账户信息">
+            </div>
+            <button class="withdraw-btn" id="submitWithdraw">
+                提交提现申请
+            </button>
+        </div>
+        
+        <div class="history-section">
+            <h2>提现记录</h2>
+            <div class="history-list" id="historyList">
+                <!-- 提现记录将动态加载到这里 -->
+            </div>
+        </div>
+        
+        <a href="/index.html" class="back-link">
+            返回首页
+        </a>
+    </div>
+
+  
+</body>
+</html>

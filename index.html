@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广告赚钱平台 - 看广告轻松赚现金</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 126, 95, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .balance-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .balance-title {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .balance-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff7e5f;
+            margin-bottom: 10px;
+        }
+        
+        .withdraw-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .withdraw-btn:hover {
+            background: #219653;
+            transform: translateY(-2px);
+        }
+        
+        .task-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 8px;
+            color: #ff7e5f;
+        }
+        
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .task-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+        }
+        
+        .task-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .task-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .task-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .task-reward {
+            color: #ff7e5f;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .ad-list {
+            margin-top: 20px;
+        }
+        
+        .ad-item {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+        }
+        
+        .ad-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .ad-icon {
+            width: 50px;
+            height: 50px;
+            background: #e9ecef;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        
+        .ad-content {
+            flex: 1;
+        }
+        
+        .ad-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .ad-desc {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        
+        .ad-reward {
+            color: #ff7e5f;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .ad-action {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .ad-action:hover {
+            background: #2980b9;
+        }
+        
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: #7f8c8d;
+            transition: all 0.3s;
+        }
+        
+        .nav-item.active {
+            color: #ff7e5f;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        
+        .banner {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .banner-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .banner-desc {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .popup-content {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 300px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .popup-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ff7e5f;
+        }
+        
+        .popup-desc {
+            margin-bottom: 20px;
+            color: #7f8c8d;
+        }
+        
+        .popup-btn {
+            background: #ff7e5f;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .popup-btn:hover {
+            background: #e56a50;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #ff7e5f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .user-name {
+            font-weight: bold;
+        }
+        
+        .user-level {
+            background: #ff7e5f;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        
+        .today-earnings {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .earning-item {
+            text-align: center;
+        }
+        
+        .earning-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff7e5f;
+        }
+        
+        .earning-label {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .stats-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        /* 登录弹窗样式 */
+        .login-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            display: none;
+        }
+        
+        .login-content {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 350px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .login-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ff7e5f;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .form-group input:focus {
+            border-color: #ff7e5f;
+            outline: none;
+        }
+        
+        .login-btn {
+            background: #ff7e5f;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            background: #e56a50;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo"> 广告赚钱平台</div>
+            <p>看广告轻松赚现金，提现秒到账</p>
+        </div>
+        
+        <div class="user-info">
+            <div style="display: flex; align-items: center;">
+                <div class="user-avatar" id="userAvatar">用</div>
+                <div style="margin-left: 10px;">
+                    <div class="user-name" id="userName">用户1234</div>
+                    
+                    <div style="font-size: 12px; color: #7f8c8d;">ID: <span id="userId">889966</span></div>
+                </div>
+            </div>
+            <div class="user-level">VIP1</div>
+           <a href="https://574.netlify.app/asset/kf.html">点击联系客服</a>
+
+        </div>
+        
+        <div class="balance-card">
+            <div class="balance-title">我的余额（元）</div>
+            <div class="balance-amount" id="balanceAmount">0.00</div>
+            <button class="withdraw-btn" id="withdrawBtn">提现</button>
+            <button class="withdraw-btn" id="startTaskBtn">开始任务</button>
+        </div>
+    
+        <div class="today-earnings">
+            <div class="earning-item">
+                <div class="earning-value" id="todayEarnings">0.00</div>
+                <div class="earning-label">今日收益</div>
+            </div>
+            <div class="earning-item">
+                <div class="earning-value" id="completedTasks">0</div>
+                <div class="earning-label">完成任务</div>
+            </div>
+            <div class="earning-item">
+                <div class="earning-value" id="totalEarnings">0.00</div>
+                <div class="earning-label">累计收益</div>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <div class="section-title"><i>📊</i> 数据统计</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="adViewCount">0</div>
+                    <div class="stat-label">广告观看次数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="activeFrames">0</div>
+                    <div class="stat-label">活跃广告数</div>
+                </div>
+            </div>
+        </div>
+        
+     
+
+    <!-- 登录弹窗 -->
+    <div class="login-popup" id="loginPopup">
+        <div class="login-content">
+            <div class="login-title">用户登录</div>
+            <div class="form-group">
+                <label for="nickname">提现姓名</label>
+                <input type="text" id="nickname" placeholder="请输入您的姓名">
+                <div class="error-message" id="nicknameError">昵称不能为空</div>
+            </div>
+            <div class="form-group">
+                <label for="phone">提现手机号</label>
+                <input type="tel" id="phone" placeholder="请输入您的手机号">
+                <div class="error-message" id="phoneError">请输入有效的手机号</div>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" placeholder="请输入密码">
+                <div class="error-message" id="passwordError">密码不能少于6位</div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">确认密码</label>
+                <input type="password" id="confirmPassword" placeholder="请再次输入密码">
+                <div class="error-message" id="confirmPasswordError">两次输入的密码不一致</div>
+            </div>
+            <button class="login-btn" id="loginBtn">登录/注册</button>
+        </div>
+    </div>
+    
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <div class="popup-title">欢迎来到广告赚钱平台</div>
+            <div class="popup-desc">完成简单任务，轻松赚取现金奖励！</div>
+            <button class="popup-btn" id="startEarning">立即开始赚钱</button>
+        </div>
+    </div>
+    
+    <script>
+    // 状态管理对象
+    const state = {
+        iframeCount: 0,
+        activeFrameCount: 0,
+        adViewCount: 0,
+        todayCount: 0,
+        totalEarnings: 0,
+        isFirstLoad: true,
+        usedKeys: [],
+        universalKeyUsed: false,
+        serverStates: [],
+        completedTasks: 0,
+        todayEarnings: 0,
+        userInfo: {
+            nickname: '',
+            phone: '',
+            userId: '',
+            isLoggedIn: false
+        }
+    };
+    
+    // 从本地存储加载登录状态
+    function loadLoginState() {
+        const savedLoginState = localStorage.getItem('adPlatformLoginState');
+        if (savedLoginState) {
+            try {
+                const parsedState = JSON.parse(savedLoginState);
+                state.userInfo = parsedState.userInfo || {
+                    nickname: '',
+                    phone: '',
+                    userId: '',
+                    isLoggedIn: false
+                };
+                
+                // 更新UI显示
+                updateUI();
+            } catch (e) {
+                console.error("加载登录状态失败:", e);
+            }
+        }
+    }
+    
+    // 保存登录状态到本地存储
+    function saveLoginState() {
+        try {
+            localStorage.setItem('adPlatformLoginState', JSON.stringify({
+                userInfo: state.userInfo
+            }));
+        } catch (e) {
+            console.error("保存登录状态失败:", e);
+        }
+    }
+    
+    // 从本地存储加载其他状态
+    function loadOtherState() {
+        const savedState = localStorage.getItem('iframeManagerState');
+        if (savedState) {
+            try {
+                const parsedState = JSON.parse(savedState);
+                state.iframeCount = parsedState.iframeCount || 0;
+                state.activeFrameCount = parsedState.activeFrameCount || 0;
+                state.adViewCount = parsedState.adViewCount || 0;
+                state.todayCount = parsedState.todayCount || 0;
+                state.totalEarnings = parsedState.totalEarnings || 0;
+                state.isFirstLoad = parsedState.isFirstLoad !== undefined ? parsedState.isFirstLoad : true;
+                state.usedKeys = parsedState.usedKeys || [];
+                state.universalKeyUsed = parsedState.universalKeyUsed || false;
+                state.serverStates = parsedState.serverStates || [];
+                state.completedTasks = parsedState.completedTasks || 0;
+                state.todayEarnings = parsedState.todayEarnings || 0;
+                
+                // 更新UI显示
+                updateUI();
+            } catch (e) {
+                console.error("加载其他状态失败:", e);
+            }
+        }
+    }
+    
+    // 保存其他状态到本地存储
+    function saveOtherState() {
+        try {
+            const otherState = {
+                iframeCount: state.iframeCount,
+                activeFrameCount: state.activeFrameCount,
+                adViewCount: state.adViewCount,
+                todayCount: state.todayCount,
+                totalEarnings: state.totalEarnings,
+                isFirstLoad: state.isFirstLoad,
+                usedKeys: state.usedKeys,
+                universalKeyUsed: state.universalKeyUsed,
+                serverStates: state.serverStates,
+                completedTasks: state.completedTasks,
+                todayEarnings: state.todayEarnings
+            };
+            localStorage.setItem('iframeManagerState', JSON.stringify(otherState));
+        } catch (e) {
+            console.error("保存其他状态失败:", e);
+        }
+    }
+    
+    // 更新UI显示
+    function updateUI() {
+        document.getElementById('balanceAmount').textContent = state.totalEarnings.toFixed(2);
+        document.getElementById('todayEarnings').textContent = state.todayEarnings.toFixed(2);
+        document.getElementById('completedTasks').textContent = state.completedTasks;
+        document.getElementById('totalEarnings').textContent = state.totalEarnings.toFixed(2);
+        document.getElementById('adViewCount').textContent = state.adViewCount;
+        document.getElementById('activeFrames').textContent = state.activeFrameCount;
+        
+        // 更新用户信息
+        if (state.userInfo.isLoggedIn) {
+            document.getElementById('userName').textContent = state.userInfo.nickname;
+            document.getElementById('userId').textContent = state.userInfo.userId;
+            document.getElementById('userAvatar').textContent = state.userInfo.nickname.charAt(0);
+        }
+    }
+    
+    // 验证表单
+    function validateForm() {
+        let isValid = true;
+        
+        const nickname = document.getElementById('nickname').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        // 验证昵称
+        if (nickname === '') {
+            document.getElementById('nicknameError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('nicknameError').style.display = 'none';
+        }
+        
+        // 验证手机号
+        const phoneRegex = /^1[3-9]\d{9}$/;
+        if (!phoneRegex.test(phone)) {
+            document.getElementById('phoneError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('phoneError').style.display = 'none';
+        }
+        
+        // 验证密码
+        if (password.length < 6) {
+            document.getElementById('passwordError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('passwordError').style.display = 'none';
+        }
+        
+        // 验证确认密码
+        if (password !== confirmPassword) {
+            document.getElementById('confirmPasswordError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('confirmPasswordError').style.display = 'none';
+        }
+        
+        return isValid;
+    }
+    
+    // 处理登录/注册
+    function handleLogin() {
+        if (!validateForm()) {
+            return;
+        }
+        
+        const nickname = document.getElementById('nickname').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        
+        // 生成用户ID（简单模拟）
+        const userId = Math.floor(100000 + Math.random() * 900000).toString();
+        
+        // 保存用户信息
+        state.userInfo = {
+            nickname: nickname,
+            phone: phone,
+            userId: userId,
+            isLoggedIn: true
+        };
+        
+        // 保存登录状态
+        saveLoginState();
+        
+        // 更新UI
+        updateUI();
+        
+        // 隐藏登录弹窗
+        document.getElementById('loginPopup').style.display = 'none';
+        
+        // 显示欢迎弹窗
+        setTimeout(function() {
+            document.getElementById('popup').style.display = 'flex';
+        }, 500);
+    }
+    
+    // 完成任务并增加收益
+    function completeTask(reward) {
+        state.completedTasks++;
+        state.todayEarnings += parseFloat(reward);
+        state.totalEarnings += parseFloat(reward);
+        state.adViewCount++;
+        
+        updateUI();
+        saveOtherState();
+        
+        // 显示完成任务提示
+        alert(`任务完成！获得 ${reward} 元奖励！`);
+    }
+    
+    // 初始化页面
+    function init() {
+        // 先加载登录状态
+        loadLoginState();
+        // 再加载其他状态
+        loadOtherState();
+        
+        // 登录按钮点击事件
+        document.getElementById('loginBtn').addEventListener('click', handleLogin);
+        
+        // 为任务卡片添加点击事件
+        var taskCards = document.querySelectorAll('.task-card');
+        taskCards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                // 检查是否已登录
+                if (!state.userInfo.isLoggedIn) {
+                    document.getElementById('loginPopup').style.display = 'flex';
+                    return;
+                }
+                
+                const reward = this.getAttribute('data-reward');
+                completeTask(reward);
+            });
+        });
+        
+        // 为广告项添加点击事件
+        var adItems = document.querySelectorAll('.ad-item');
+        adItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                // 检查是否已登录
+                if (!state.userInfo.isLoggedIn) {
+                    document.getElementById('loginPopup').style.display = 'flex';
+                    return;
+                }
+                
+                const reward = this.getAttribute('data-reward');
+                completeTask(reward);
+            });
+        });
+        
+        // 为广告按钮添加点击事件
+        var adButtons = document.querySelectorAll('.ad-action');
+        adButtons.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation(); // 阻止事件冒泡
+                
+                // 检查是否已登录
+                if (!state.userInfo.isLoggedIn) {
+                    document.getElementById('loginPopup').style.display = 'flex';
+                    return;
+                }
+                
+                const adItem = this.closest('.ad-item');
+                const reward = adItem.getAttribute('data-reward');
+                completeTask(reward);
+            });
+        });
+        
+        // 提现按钮点击事件 - 检查登录状态
+        document.getElementById('withdrawBtn').addEventListener('click', function() {
+            if (!state.userInfo.isLoggedIn) {
+                document.getElementById('loginPopup').style.display = 'flex';
+                return;
+            }
+            location.href = '/main.html';
+        });
+        
+        // 开始任务按钮点击事件 - 检查登录状态
+        document.getElementById('startTaskBtn').addEventListener('click', function() {
+            if (!state.userInfo.isLoggedIn) {
+                document.getElementById('loginPopup').style.display = 'flex';
+                return;
+            }
+            location.href = '/index2.html';
+        });
+        
+        // 立即开始赚钱按钮点击事件
+        document.getElementById('startEarning').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+    }
+    
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
