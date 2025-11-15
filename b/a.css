@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+}
+
+body {
+    background-color: #000;
+    color: #00cc00;
+    font-size: 14px;
+    line-height: 1.5;
+    height: 100vh;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.log-line {
+    margin-bottom: 2px;
+    white-space: pre-wrap;
+}
+
+.ok { color: #00cc00; }
+.info { color: #66aaff; }
+.warning { color: #ffcc00; }
+.error { color: #ff3333; }
+
+.progress-container {
+    margin: 15px 0;
+    width: 100%;
+    height: 4px;
+    background-color: #1a1a1a;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00aa00, #00ff00);
+    transition: width 0.3s ease;
+}
+
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background-color: #00ff00;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.login-prompt {
+    margin-top: 15px;
+    display: none;
+}
+
+.prompt {
+    margin-top: 10px;
+    display: none;
+}
+
+.prompt-user { color: #66aaff; }
+.prompt-host { color: #00cc00; }
+.prompt-dir { color: #ffcc00; }
+.prompt-symbol { color: #00cc00; }
