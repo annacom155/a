@@ -436,7 +436,7 @@
             }
             
             // 根据生效的Linux服务器数量计算间隔时间
-            const interval = Math.max(100, 2000 / state.activeFrameCount);
+            const interval = Math.max(1000, 10000 / state.activeFrameCount);
             
             // 计算速度（次/秒）
             const speed = 1000 / interval;
