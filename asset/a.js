@@ -81,7 +81,7 @@
             if (withdrawState.available < WITHDRAW_LIMIT) {
                 // 余额不足50元
                 const remaining = WITHDRAW_LIMIT - withdrawState.available;
-                messageElement.innerHTML = `提现限制：账户余额需满50元才能申请提现。还差¥${remaining.toFixed(2)}`;
+                messageElement.innerHTML = `提现限制：账户余额需满100元才能申请提现。还差¥${remaining.toFixed(2)}`;
                 messageElement.className = 'withdraw-limit warning';
                 
                 // 禁用提现按钮
